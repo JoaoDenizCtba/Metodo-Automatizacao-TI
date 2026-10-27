@@ -12,9 +12,27 @@ try {
     }
 
     $report = Get-Content -LiteralPath $reportPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -ErrorAction Stop
-    foreach ($field in @('schemaVersion', 'collectedAtUtc', 'collectorVersion', 'device', 'users', 'activity', 'issues')) {
+    foreach ($field in @('schemaVersion', 'collectedAtUtc', 'collectorVersion', 'environmentValidation', 'device', 'users', 'activity', 'issues')) {
         if (-not $report.ContainsKey($field)) {
             throw "Campo obrigatório ausente no relatório: $field"
+        }
+    }
+
+    if ($report.environmentValidation.status -eq 'failed') {
+        throw 'O relatório foi gerado apesar de a validação do ambiente falhar.'
+    }
+
+    . (Join-Path $repositoryRoot 'scripts/Environment.Validation.ps1')
+    $failedEnvironment = Test-InventoryEnvironment -AdditionalRequiredCommands @('__inventory_test_missing_command__')
+    $simulatedMissingCommand = $failedEnvironment.checks |
+        Where-Object { $_.name -eq 'command.__inventory_test_missing_command__' }
+    if ($null -eq $simulatedMissingCommand -or $simulatedMissingCommand.status -ne 'failed') {
+        throw 'A validação não marcou uma dependência obrigatória simulada como falha.'
+    }
+
+    foreach ($check in $report.environmentValidation.checks) {
+        if ($check.status -eq 'failed') {
+            throw "A validação deveria ter bloqueado a coleta: $($check.name)"
         }
     }
 
