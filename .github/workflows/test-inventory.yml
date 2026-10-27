@@ -18,6 +18,50 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - name: Validate POSIX bootstrap syntax
+        if: runner.os != 'Windows'
+        shell: pwsh
+        run: |
+          $scripts = @(
+            './executor/Start-Inventario.sh',
+            './executor/bootstrap/PowerShell-Bootstrap.Common.sh',
+            './executor/bootstrap/Install-PowerShell-Linux.sh',
+            './executor/bootstrap/Install-PowerShell-macOS.sh',
+            './tests/Test-BootstrapMetadata.sh'
+          )
+          foreach ($script in $scripts) {
+            sh -n $script
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          sh ./tests/Test-BootstrapMetadata.sh
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Validate Windows bootstrap syntax
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path ./executor/Bootstrap-Windows.ps1),
+            [ref]$tokens,
+            [ref]$parseErrors
+          ) | Out-Null
+          if ($parseErrors.Count -gt 0) {
+            $parseErrors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
       - name: Run inventory smoke test
         shell: pwsh
         run: ./tests/Test-InventorySmoke.ps1
+      - name: Run native Unix bootstrap
+        if: runner.os != 'Windows'
+        shell: pwsh
+        run: |
+          sh ./executor/Start-Inventario.sh -OutputPath (Join-Path $env:RUNNER_TEMP 'inventory-bootstrap.json')
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Run native Windows bootstrap
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          & ./executor/Start-Inventario.cmd -OutputPath (Join-Path $env:RUNNER_TEMP 'inventory-bootstrap.json')
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

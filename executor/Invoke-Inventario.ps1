@@ -28,6 +28,24 @@ if ([string]::IsNullOrWhiteSpace($config.fileNamePrefix)) {
     throw 'A matriz precisa definir fileNamePrefix com um valor não vazio.'
 }
 
+$validationPath = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../scripts/Environment.Validation.ps1'))
+if (-not (Test-Path -LiteralPath $validationPath -PathType Leaf)) {
+    throw "Módulo de validação do ambiente não encontrado: $validationPath"
+}
+
+. $validationPath
+$environment = Ensure-InventoryEnvironment
+foreach ($check in $environment.checks | Where-Object { $_.status -eq 'warning' }) {
+    Write-Warning "$($check.name): $($check.message)"
+}
+
+if ($environment.status -eq 'failed') {
+    $failures = $environment.checks |
+        Where-Object { $_.status -eq 'failed' } |
+        ForEach-Object { "$($_.name): $($_.message)" }
+    throw "Validação do ambiente falhou; coleta cancelada. $($failures -join ' | ')"
+}
+
 $collectorPath = if ($IsWindows) {
     Join-Path $PSScriptRoot '../scripts/Inventario.Windows.ps1'
 }
@@ -54,6 +72,7 @@ $report = [ordered]@{
     schemaVersion = 1
     collectedAtUtc = $collectedAt.ToString('o')
     collectorVersion = '0.1.0'
+    environmentValidation = $environment
     device = $inventory.device
     users = $inventory.users
     activity = $inventory.activity
