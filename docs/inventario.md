@@ -26,6 +26,8 @@ Por padrão, o arquivo é gravado em uma pasta de dados local do usuário. O dir
 pwsh -File ./executor/Invoke-Inventario.ps1 -OutputPath ./inventario.json
 ```
 
+Os diretórios padrão são `%LOCALAPPDATA%\Metodo-Automatizacao-TI\inventarios` no Windows, `~/Library/Application Support/Metodo-Automatizacao-TI/inventarios` no macOS e `~/.local/share/Metodo-Automatizacao-TI/inventarios` no Linux.
+
 `-WhatIf` mostra a ação de gravação sem criar o arquivo. `-ConfigPath` permite apontar para outra matriz compatível com a versão 1.
 
 O teste de fumaça para o sistema atual pode ser executado com:

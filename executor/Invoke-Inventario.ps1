@@ -68,6 +68,9 @@ if ([string]::IsNullOrWhiteSpace($OutputPath)) {
     $baseDirectory = if ($IsWindows) {
         $env:LOCALAPPDATA
     }
+    elseif ($IsMacOS) {
+        Join-Path $HOME 'Library/Application Support'
+    }
     else {
         Join-Path $HOME '.local/share'
     }
