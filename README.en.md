@@ -82,10 +82,10 @@ The GitHub Actions workflow also checks launcher syntax and runs tests on Window
 
 The current scope is local inventory, with no Active Directory integration, centralized report submission, scheduling, or remote installation and remediation. The availability of some data depends on the operating system, installed commands, and the user's permissions.
 
-- Inventory documentation: [Português](docs/inventario.md) · [Español](docs/inventario.es.md) · [English](docs/inventario.en.md).
-- Automation concept: [Português](docs/conceito.md) · [Español](docs/conceito.es.md) · [English](docs/conceito.en.md).
+- [Local inventory — Portuguese, Spanish, and English](docs/inventario.md).
+- [Automation concept — Portuguese, Spanish, and English](docs/conceito.md).
 
-The documents in `docs/` are also available in Portuguese, Spanish, and English.
+Each document in `docs/` contains all three language versions in one file, reducing duplication and simplifying maintenance.
 
 ## Author
 
