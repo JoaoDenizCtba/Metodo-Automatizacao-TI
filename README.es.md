@@ -82,10 +82,10 @@ El workflow de GitHub Actions también comprueba la sintaxis de los inicializado
 
 El alcance actual es un inventario local, sin integración con Active Directory, envío centralizado de informes, programación ni instalación o corrección remotas. La disponibilidad de algunos datos depende del sistema operativo, de los comandos instalados y de los permisos del usuario.
 
-- [Inventario — português](docs/inventario.md) · [español](docs/inventario.es.md) · [English](docs/inventario.en.md).
-- [Concepto de automatización — português](docs/conceito.md) · [español](docs/conceito.es.md) · [English](docs/conceito.en.md).
+- [Inventario local — portugués, español e inglés](docs/inventario.md).
+- [Concepto de automatización — portugués, español e inglés](docs/conceito.md).
 
-Los documentos de `docs/` también están disponibles en portugués, español e inglés.
+Cada documento de `docs/` reúne las tres versiones en el mismo archivo, lo que reduce la duplicación y facilita el mantenimiento.
 
 ## Autor
 

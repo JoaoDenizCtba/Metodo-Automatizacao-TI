@@ -82,10 +82,10 @@ O workflow do GitHub Actions também verifica a sintaxe dos inicializadores e ex
 
 O escopo atual é um inventário local, sem integração com Active Directory, envio centralizado de relatórios, agendamento ou instalação e correção remotas. A disponibilidade de alguns dados depende do sistema operacional, dos comandos presentes e das permissões do usuário.
 
-- [Inventário — português](docs/inventario.md) · [español](docs/inventario.es.md) · [English](docs/inventario.en.md).
-- [Conceito de automação — português](docs/conceito.md) · [español](docs/conceito.es.md) · [English](docs/conceito.en.md).
+- [Inventário local — português, espanhol e inglês](docs/inventario.md).
+- [Conceito de automação — português, espanhol e inglês](docs/conceito.md).
 
-Os documentos de `docs/` também estão disponíveis em português, espanhol e inglês.
+Cada documento de `docs/` reúne as três versões no mesmo arquivo, reduzindo a duplicação e facilitando a manutenção.
 
 ## Autor
 
