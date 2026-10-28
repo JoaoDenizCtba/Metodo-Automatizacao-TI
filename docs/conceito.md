@@ -1,5 +1,7 @@
 ﻿# Conceito Estruturado de Automação
 
+[Português](conceito.md) | [Español](conceito.es.md) | [English](conceito.en.md)
+
 Este método foi desenvolvido com base nas necessidades reais de automação em ambientes corporativos, com foco em modularidade, clareza e controle.
 
 ## Princípios do Método

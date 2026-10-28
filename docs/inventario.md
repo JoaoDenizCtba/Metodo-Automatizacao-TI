@@ -1,5 +1,7 @@
 # Inventário local — primeira versão
 
+[Português](inventario.md) | [Español](inventario.es.md) | [English](inventario.en.md)
+
 ## Objetivo
 
 Coletar informações locais de equipamentos Windows, Linux e macOS fora de domínio, com PowerShell 7 ou superior. O executor escolhe um coletor específico para o sistema operacional e grava um arquivo JSON; nenhum envio de rede ou alteração de configuração é feito pelo projeto.

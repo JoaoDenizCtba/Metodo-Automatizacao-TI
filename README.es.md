@@ -82,10 +82,10 @@ El workflow de GitHub Actions también comprueba la sintaxis de los inicializado
 
 El alcance actual es un inventario local, sin integración con Active Directory, envío centralizado de informes, programación ni instalación o corrección remotas. La disponibilidad de algunos datos depende del sistema operativo, de los comandos instalados y de los permisos del usuario.
 
-- [Alcance, formato y limitaciones del inventario](docs/inventario.md) — disponible en portugués.
-- [Concepto estructurado de automatización](docs/conceito.md) — disponible en portugués.
+- [Inventario — português](docs/inventario.md) · [español](docs/inventario.es.md) · [English](docs/inventario.en.md).
+- [Concepto de automatización — português](docs/conceito.md) · [español](docs/conceito.es.md) · [English](docs/conceito.en.md).
 
-Las traducciones al español y al inglés de este README están separadas; los documentos detallados de `docs/` todavía no se han traducido.
+Los documentos de `docs/` también están disponibles en portugués, español e inglés.
 
 ## Autor
 
